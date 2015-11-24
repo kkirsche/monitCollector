@@ -27,8 +27,18 @@ func collect(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal(err)
 		}
+		// Single path
 		path := m.PathForKeyShortest("version")
 		fmt.Println(m.ValueForPath(path))
+		// Multi-path
+		paths := m.PathsForKey("percent")
+		for _, path := range paths {
+			val, err := m.ValueForPath(path)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println(val)
+		}
 		io.WriteString(w, "Success")
 	}
 }
