@@ -9,15 +9,31 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"path/filepath"
 )
 
 type Map map[string]interface{}
 
+func processEventQueue(event_queue_basepath string) {
+	event_queue_path := fmt.Sprintf("%s/*", event_queue_basepath)
+	str_arr, err := filepath.Glob(event_queue_path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, path := range str_arr {
+		dat, err := ioutil.ReadFile(path)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println(string(dat[110:]))
+	}
+}
+
 func collect(w http.ResponseWriter, r *http.Request) {
 	username, password, ok := r.BasicAuth()
 	if ok {
-		output := fmt.Sprintf("Username: %s | Password: %s", username, password)
-		fmt.Println(output)
+		_ = fmt.Sprintf("Username: %s | Password: %s", username, password)
 		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
 			log.Fatal(err)
@@ -28,8 +44,12 @@ func collect(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(err)
 		}
 		// Single path
-		path := m.PathForKeyShortest("version")
-		fmt.Println(m.ValueForPath(path))
+		path := m.PathForKeyShortest("avg01")
+		val, err := m.ValueForPath(path)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(val)
 		// Multi-path
 		paths := m.PathsForKey("percent")
 		for _, path := range paths {
@@ -45,5 +65,5 @@ func collect(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/collector", collect)
-	http.ListenAndServe(":2812", nil)
+	http.ListenAndServe(":8085", nil)
 }
