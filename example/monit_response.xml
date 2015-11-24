@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<monit id="299c3f89d3fbf1a713917bf82eec09f4" incarnation="1448367870" version="5.14">
+   <server>
+      <uptime>1234</uptime>
+      <poll>30</poll>
+      <startdelay>0</startdelay>
+      <localhostname>example.hostname</localhostname>
+      <controlfile>/Users/exampleUser/.monitrc</controlfile>
+      <httpd>
+         <address>localhost</address>
+         <port>2812</port>
+         <ssl>0</ssl>
+      </httpd>
+      <credentials>
+         <username>monit</username>
+         <password>monit</password>
+      </credentials>
+   </server>
+   <platform>
+      <name>Darwin</name>
+      <release>15.0.0</release>
+      <version>Darwin Kernel Version 15.0.0: Sat Sep 19 15:53:46 PDT 2015; root:xnu-3247.10.11~1/RELEASE_X86_64</version>
+      <machine>x86_64</machine>
+      <cpu>8</cpu>
+      <memory>16777216</memory>
+      <swap>3145728</swap>
+   </platform>
+   <services>
+      <service name="example.hostname">
+         <type>5</type>
+         <collected_sec>1448369489</collected_sec>
+         <collected_usec>286463</collected_usec>
+         <status>2</status>
+         <status_hint>0</status_hint>
+         <monitor>1</monitor>
+         <monitormode>0</monitormode>
+         <pendingaction>0</pendingaction>
+         <system>
+            <load>
+               <avg01>1.47</avg01>
+               <avg05>1.60</avg05>
+               <avg15>1.61</avg15>
+            </load>
+            <cpu>
+               <user>3.2</user>
+               <system>14.8</system>
+            </cpu>
+            <memory>
+               <percent>56.2</percent>
+               <kilobyte>9431804</kilobyte>
+            </memory>
+            <swap>
+               <percent>52.2</percent>
+               <kilobyte>1645056</kilobyte>
+            </swap>
+         </system>
+      </service>
+   </services>
+   <servicegroups />
+</monit>
